@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
     // ... Navigate back to login page and remove all previous routes
     if (mounted) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/landing', (route) => false);
     }
   }
 
@@ -88,49 +88,103 @@ class _HomePageState extends State<HomePage> {
             ? const CircularProgressIndicator()
             // ... Show welcome message and content area
             : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // ... Welcome icon
-                  const Icon(
-                    Icons.check_circle,
-                    size: 80,
-                    color: Colors.green,
-                  ),
-                  const SizedBox(height: 30),
-
-                  // ... Welcome title
+                  const SizedBox(height: 20),
                   const Text(
-                    "Welcome!",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    "Dashboard",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 15),
-
-                  // ... Welcome message
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: Text(
-                      "You have successfully logged in.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ),
-                  const SizedBox(height: 50),
-
-                  // ... Logout button
-                  ElevatedButton.icon(
-                    onPressed:
-                        _isLoading ? null : _showLogoutConfirmation,
-                    icon: const Icon(Icons.logout),
-                    label: const Text("Logout"),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(150, 50),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      padding: const EdgeInsets.all(20),
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      children: [
+                        _buildDashboardCard(
+                          context,
+                          "Diet",
+                          Icons.restaurant,
+                          Colors.orange,
+                          '/diet',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Expense",
+                          Icons.account_balance_wallet,
+                          Colors.green,
+                          '/expense',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Projects",
+                          Icons.assignment,
+                          Colors.blue,
+                          '/projects',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Cash",
+                          Icons.money,
+                          Colors.teal,
+                          '/cash',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Journaling",
+                          Icons.book,
+                          Colors.brown,
+                          '/journaling',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Income",
+                          Icons.trending_up,
+                          Colors.blueAccent,
+                          '/income',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Accounting",
+                          Icons.pie_chart,
+                          Colors.deepPurple,
+                          '/accounting',
+                        ),
+                        _buildDashboardCard(
+                          context,
+                          "Profile",
+                          Icons.person,
+                          Colors.purple,
+                          '/profile',
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
+      ),
+    );
+  }
+
+  Widget _buildDashboardCard(BuildContext context, String title, IconData icon, Color color, String route) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(context, route),
+        borderRadius: BorderRadius.circular(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 40, color: color),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }

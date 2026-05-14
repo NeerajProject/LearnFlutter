@@ -40,14 +40,14 @@ class ApiConfig {
   /// with your actual server IP address (e.g., '192.168.x.x')
   static String get _getHost {
     if (kIsWeb) {
-      return 'localhost';
+      return '127.0.0.1';
     } else if (Platform.isAndroid) {
       // Android emulator uses 10.0.2.2 to access host machine
       // For physical device, replace with actual server IP
-      return '10.0.2.2';
+      return '127.0.0.1';
     }
     // iOS, Windows, macOS, Linux - all can use localhost
-    return 'localhost';
+    return '127.0.0.1';
   }
 
   /// Login endpoint path
