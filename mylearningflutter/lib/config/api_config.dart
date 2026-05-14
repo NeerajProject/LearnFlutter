@@ -14,6 +14,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 /// - iOS: Uses 'localhost' (can access host machine directly)
 /// - Windows/macOS/Linux: Uses 'localhost' (desktop platforms)
 class ApiConfig {
+  /// Static token to store authentication state
+  static String? authToken;
+
   /// Private constructor to prevent instantiation
   ApiConfig._();
 
@@ -56,11 +59,17 @@ class ApiConfig {
   /// Registration endpoint path
   static const String registerEndpoint = '/users/register';
 
+  /// Food Master endpoint path
+  static const String foodEndpoint = '/diets/foods/';
+
   /// Complete login URL
   static String get loginUrl => '$baseUrl$loginEndpoint';
 
   /// Complete registration URL
   static String get registerUrl => '$baseUrl$registerEndpoint';
+
+  /// Complete food master URL
+  static String get foodUrl => '$baseUrl$foodEndpoint';
 
   /// API request headers
   /// 

@@ -86,6 +86,9 @@ class _LoginPageState extends State<LoginPage> {
 
       // ... Check if response status indicates success
       if (ApiConfig.successStatusCodes.contains(response.statusCode)) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        ApiConfig.authToken = responseData['access_token'];
+        
         _showMessage("Login Successful!");
 
         // ... Navigate to home page on successful loginr
